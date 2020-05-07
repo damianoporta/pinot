@@ -64,7 +64,7 @@ public class CombineOperator extends BaseOperator<IntermediateResultsBlock> {
     _operators = operators;
     _executorService = executorService;
     _brokerRequest = brokerRequest;
-    _timeOutMs = timeOutMs;
+    _timeOutMs =600_000;
   }
 
   @Override

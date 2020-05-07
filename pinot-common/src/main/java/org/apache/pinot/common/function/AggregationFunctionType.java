@@ -46,7 +46,8 @@ public enum AggregationFunctionType {
   PERCENTILEMV("percentileMV"),
   PERCENTILEESTMV("percentileEstMV"),
   PERCENTILETDIGESTMV("percentileTDigestMV"),
-  DISTINCT("distinct");
+  DISTINCT("distinct"),
+  DRAWDOWN("drawdown");
 
   private final String _name;
 

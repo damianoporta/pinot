@@ -77,7 +77,7 @@ public class CombineGroupByOperator extends BaseOperator<IntermediateResultsBloc
     _operators = operators;
     _brokerRequest = brokerRequest;
     _executorService = executorService;
-    _timeOutMs = timeOutMs;
+    _timeOutMs = 600_000;
     _innerSegmentNumGroupsLimit = innerSegmentNumGroupsLimit;
     _interSegmentNumGroupsLimit =
         (int) Math.min((long) innerSegmentNumGroupsLimit * INTER_SEGMENT_NUM_GROUPS_LIMIT_FACTOR, Integer.MAX_VALUE);

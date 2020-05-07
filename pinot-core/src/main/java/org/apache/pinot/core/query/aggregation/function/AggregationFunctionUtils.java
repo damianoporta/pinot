@@ -82,6 +82,10 @@ public class AggregationFunctionUtils {
         && functionContexts[0].getAggregationFunction().getType() == AggregationFunctionType.DISTINCT;
   }
 
+  public static boolean isDrawdown(AggregationFunctionContext[] functionContexts) {
+    return true;
+  }
+
   /**
    * Creates an {@link AggregationFunctionContext} from the {@link AggregationInfo}.
    * NOTE: This method does not work for {@code DISTINCT} aggregation function.

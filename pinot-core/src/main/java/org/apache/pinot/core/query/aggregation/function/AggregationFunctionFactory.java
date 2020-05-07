@@ -125,6 +125,10 @@ public class AggregationFunctionFactory {
                 "Broker request must be provided for 'DISTINCT' aggregation function");
             return new DistinctAggregationFunction(arguments, brokerRequest.getOrderBy(),
                 brokerRequest.getLimit());
+          case DRAWDOWN:
+            if (arguments.size() != 2)
+              throw new IllegalArgumentException();
+            return new DrawdownAggregationFunction(arguments.get(0), arguments.get(1));
           default:
             throw new IllegalArgumentException();
         }

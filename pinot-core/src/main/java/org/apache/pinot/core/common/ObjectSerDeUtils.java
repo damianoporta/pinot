@@ -38,7 +38,7 @@ import org.apache.pinot.core.query.aggregation.DistinctTable;
 import org.apache.pinot.core.query.aggregation.function.customobject.AvgPair;
 import org.apache.pinot.core.query.aggregation.function.customobject.MinMaxRangePair;
 import org.apache.pinot.core.query.aggregation.function.customobject.QuantileDigest;
-
+import org.apache.pinot.core.query.aggregation.function.customobject.RangeSet;
 
 /**
  * The {@code ObjectSerDeUtils} class provides the utility methods to serialize/de-serialize objects.
@@ -60,7 +60,8 @@ public class ObjectSerDeUtils {
     Map(8),
     IntSet(9),
     TDigest(10),
-    DistinctTable(11);
+    DistinctTable(11),
+    RangeSet(12);
 
     private int _value;
 
@@ -97,6 +98,8 @@ public class ObjectSerDeUtils {
         return ObjectType.TDigest;
       } else if (value instanceof DistinctTable) {
         return ObjectType.DistinctTable;
+      } else if (value instanceof RangeSet) {
+        return ObjectType.RangeSet;
       } else {
         throw new IllegalArgumentException("Unsupported type of value: " + value.getClass().getSimpleName());
       }
@@ -228,6 +231,24 @@ public class ObjectSerDeUtils {
     @Override
     public AvgPair deserialize(ByteBuffer byteBuffer) {
       return AvgPair.fromByteBuffer(byteBuffer);
+    }
+  };
+
+  public static final ObjectSerDe<RangeSet> RANGESET_SER_DE = new ObjectSerDe<RangeSet>() {
+
+    @Override
+    public byte[] serialize(RangeSet rangeSet) {
+      return rangeSet.toBytes();
+    }
+
+    @Override
+    public RangeSet deserialize(byte[] bytes) {
+      return RangeSet.fromBytes(bytes);
+    }
+
+    @Override
+    public RangeSet deserialize(ByteBuffer byteBuffer) {
+      return RangeSet.fromByteBuffer(byteBuffer);
     }
   };
 
@@ -472,7 +493,8 @@ public class ObjectSerDeUtils {
       MAP_SER_DE,
       INT_SET_SER_DE,
       TDIGEST_SER_DE,
-      DISTINCT_TABLE_SER_DE
+      DISTINCT_TABLE_SER_DE,
+      RANGESET_SER_DE
   };
   //@formatter:on
 
